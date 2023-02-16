@@ -23,15 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errors = [];
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-        $errors[] = 'Please enter a valid email address';
+        $errors[] = 'Wprowadź mail w poprawnym formacie';
     }
 
     if ($subject == '') {
-        $errors[] = 'Please enter a subject';
+        $errors[] = 'Wpisz temat';
     }
 
     if ($message == '') {
-        $errors[] = 'Please enter a message';
+        $errors[] = 'Wpisz wiadomość';
     }
 
     if (empty($errors)) {
@@ -69,41 +69,76 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php require 'includes/header.php'; ?>
 
-<h2>Contact</h2>
-
-<?php if ($sent) : ?>
-    <p>Message sent.</p>
-<?php else: ?>
-
-    <?php if (! empty($errors)) : ?>
-        <ul>
-            <?php foreach ($errors as $error) : ?>
-                <li><?= $error ?></li>    
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-
-    <form method="post" id="formContact">
-
-        <div class="form-group">
-            <label for="email">Your email</label>
-            <input class="form-control" name="email" id="email" type="email" placeholder="Your email" value="<?= htmlspecialchars($email) ?>">
+<header class="masthead" style="background-image: url('assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>W kontakcie!</h1>
+                    <span class="subheading">Czego dusza potrzebuje? Słucham</span>
+                </div>
+            </div>
         </div>
+    </div>
+</header>
 
-        <div class="form-group">
-            <label for="subject">Subject</label>
-            <input class="form-control" name="subject" id="subject" placeholder="Subject" value="<?= htmlspecialchars($subject) ?>">
+<main class="container px-4 px-lg-5 mb-4">
+
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <p>
+                    Pytania? Sugestie? Podziękowania? Jak najbardziej, wszystko to chętnie przeczytam, także jak coś to
+                    pisz!</p>
+                <div class="my-5">
+
+                    <?php if ($sent): ?>
+                        <p>Message sent.</p>
+                    <?php else: ?>
+
+                        <?php if (!empty($errors)): ?>
+                            <ul>
+                                <?php foreach ($errors as $error): ?>
+                                    <li>
+                                        <?= $error ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <form method="post" id="formCntact">
+
+                            <div class="form-floating">
+                                <input class="form-control" name="email" id="email" type="email" placeholder="Your email"
+                                    value="<?= htmlspecialchars($email) ?>">
+                                <label for="email">Twój email</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <input class="form-control" name="subject" id="subject" placeholder="Subject"
+                                    value="<?= htmlspecialchars($subject) ?>">
+                                <label for="subject">Temat</label>
+                            </div>
+
+                            <div class="form-floating">
+                                <textarea class="form-control" name="message" id="message"
+                                    placeholder="Message"><?= htmlspecialchars($message) ?></textarea>
+                                <label for="message">Wiadomość</label>
+                            </div>
+
+                            <button class="btn btn-primary text-uppercase mt-4" id="submitButton"
+                                type="submit">W świat!</button>
+
+                        </form>
+
+                    <?php endif; ?>
+
+
+
+
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label for="message">Message</label>
-            <textarea class="form-control" name="message" id="message" placeholder="Message"><?= htmlspecialchars($message) ?></textarea>
-        </div>
-
-        <button class="btn">Send</button>
-
-    </form>
-
-<?php endif; ?>
-
-<?php require 'includes/footer.php'; ?>
+    <?php require 'includes/footer.php'; ?>
