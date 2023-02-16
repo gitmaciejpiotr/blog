@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn = require 'includes/db.php';
 
     if (User::authenticate($conn, $_POST['username'], $_POST['password'])) {
-        
+
         Auth::login();
 
         Url::redirect('/');
 
     } else {
-        
+
         $error = "login incorrect";
 
     }
@@ -35,28 +35,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 </header>
 
-<main class="container px-4 px-lg-5">
+<main class="container px-4 px-lg-5 mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <h2>Logowanie</h2>
 
-<h2>Login</h2>
+                <?php if (!empty($error)): ?>
+                    <p>
+                        <?= $error ?>
+                    </p>
+                <?php endif; ?>
 
-<?php if (! empty($error)) : ?>
-    <p><?= $error ?></p>
-<?php endif; ?>
+                <form class="mt-6" method="post">
 
-<form method="post">
+                    <div class="form-floating">
 
-    <div class="form-group">
-        <label for="username">Username</label>
-        <input name="username" id="username" class="form-control">
+                        <input name="username" type="text" id="username" class="form-control" placeholder="hej">
+                        <label for="username">Username</label>
+                    </div>
+
+                    <div class="form-floating">
+
+                        <input type="password" name="password" id="password" class="form-control" placeholder="hej">
+                        <label for="password">Password</label>
+                    </div>
+
+                    <button class="btn btn-primary text-uppercase mt-4" id="submitButton" type="submit">Zaloguj</button>
+
+                </form>
+
+
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="form-control">
-    </div>
-
-    <button class="btn">Log in</button>
-
-</form>
-
-<?php require 'includes/footer.php'; ?>
+    <?php require 'includes/footer.php'; ?>

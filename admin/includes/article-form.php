@@ -1,41 +1,54 @@
-<?php if (! empty($article->errors)) : ?>
-    <ul>
-        <?php foreach ($article->errors as $error) : ?>
-            <li><?= $error ?></li>    
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
+<main class="container px-4 px-lg-5 mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
 
-<form method="post" id="formArticle">
+            <?php if (!empty($article->errors)): ?>
+             <ul>
+              <?php foreach ($article->errors as $error): ?>
+                <li>
+                     <?= $error ?>
+                </li>
+               <?php endforeach; ?>
+             </ul>
+            <?php endif; ?>
 
-    <div class="form-group">
-        <label for="title">Title</label>
-        <input class="form-control" name="title" id="title" placeholder="Article title" value="<?= htmlspecialchars($article->title); ?>">
-    </div>
+            <form class="mt-6" method="post">
 
-    <div class="form-group">
-        <label for="content">Content</label>
-        <textarea class="form-control" name="content" rows="4" cols="40" id="content" placeholder="Article content"><?= htmlspecialchars($article->content); ?></textarea>
-    </div>
+                <div class="form-floating">
+                    
+                    <input class="form-control" name="title" id="title" placeholder="Article title" value="">
+                    <label for="title">Tytuł</label>
+                </div>
 
-    <div class="form-group">
-        <label for="content">Content</label>
-        <label for="published_at">Publication date and time</label>
-        <input class="form-control" name="published_at" id="published_at" value="<?= htmlspecialchars($article->published_at); ?>">
-    </div>
+                <div class="form-floating">
+                    <textarea class="form-control longText" name="content" id="content"
+                        placeholder="Article content"></textarea>
+                        <label for="content">Treść</label>
+                </div>
 
-    <fieldset>
-        <legend>Categories</legend>
+                <div class="form-floating">
+                    <input class="form-control" name="published_at" id="published_at" value="" placeholder="hej">
+                    <label for="published_at">Data i godzina opublikowania</label>
+                </div>
 
-        <?php foreach ($categories as $category) : ?>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" name="category[]" value="<?= $category['id'] ?>" id="category<?= $category['id'] ?>"
-                       <?php if (in_array($category['id'], $category_ids)) :?>checked<?php endif; ?>>
-                <label class="form-check-label" for="category<?= $category['id'] ?>"><?= htmlspecialchars($category['name']) ?></label>
+                <fieldset>
+                    <legend>Categories</legend>
+
+                    <?php foreach ($categories as $category): ?>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="category[]" value="<?= $category['id'] ?>"
+                                id="category<?= $category['id'] ?>" <?php if (in_array($category['id'], $category_ids)): ?>checked<?php endif; ?>>
+                            <label class="form-check-label" for="category<?= $category['id'] ?>"><?=
+                                  htmlspecialchars($category['name']) ?></label>
+                        </div>
+                    <?php endforeach; ?>
+                </fieldset>
+
+                <button class="btn btn-primary text-uppercase mt-4" id="submitButton" type="submit">Zapisz</button>
+
+            </form>
+
             </div>
-        <?php endforeach; ?>
-    </fieldset>
-
-    <button class="btn">Save</button>
-
-</form>
+        </div>
+    </div>
