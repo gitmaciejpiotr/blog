@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
 
     $article = Article::getByID($conn, $_GET['id']);
 
-    if ( ! $article) {
+    if (!$article) {
         die("article not found");
     }
 
@@ -51,11 +51,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Restrict the file type
         $mime_types = ['image/gif', 'image/png', 'image/jpeg'];
-        
+
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $mime_type = finfo_file($finfo, $_FILES['file']['tmp_name']);
 
-        if ( ! in_array($mime_type, $mime_types)) {
+        if (!in_array($mime_type, $mime_types)) {
 
             throw new Exception('Invalid file type');
 
@@ -114,28 +114,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php require '../includes/header.php'; ?>
 
-<h2>Edit article image</h2>
+<header>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h2>Edytuj zdjęcie artykułu</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-<?php if ($article->image_file) : ?>
-    <img src="/uploads/<?= $article->image_file; ?>">
+<main class="container mt-5 px-4 px-lg-5 mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
 
-    <a class="delete" href="delete-article-image.php?id=<?= $article->id; ?>">Delete</a>
+                <?php if ($article->image_file): ?>
+                    <img src="/uploads/<?= $article->image_file; ?>">
 
-<?php endif; ?>
+                    <a class="delete btn text-uppercase mt-2"
+                        href="delete-article-image.php?id=<?= $article->id; ?>">Usuń</a>
 
-<?php if (isset($error)) : ?>
-    <p><?= $error ?></p>
-<?php endif; ?>
+                <?php endif; ?>
 
-<form method="post" enctype="multipart/form-data">
+                <?php if (isset($error)): ?>
+                    <p>
+                        <?= $error ?>
+                    </p>
+                <?php endif; ?>
 
-    <div>
-        <label for="file">Image file</label>
-        <input type="file" name="file" id="file">
+                <form method="post" enctype="multipart/form-data">
+
+                    <div class="mt-4">
+                        <label for="file">Plik zdjęcia: </label>
+                        <input type="file" name="file" id="file">
+                    </div>
+
+                    <button class="btn btn-primary text-uppercase mt-4">Załaduj</button>
+
+                </form>
+            </div>
+        </div>
     </div>
 
-    <button>Upload</button>
-
-</form>
-
-<?php require '../includes/footer.php'; ?>
+    <?php require '../includes/footer.php'; ?>

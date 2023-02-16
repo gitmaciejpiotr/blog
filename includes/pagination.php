@@ -4,16 +4,16 @@
     <ul class="pagination justify-content-center">
         <li class="page-item">
             <?php if ($paginator->previous): ?>
-                <a class="page-link" href="<?= $base; ?>?page=<?= $paginator->previous; ?>">Previous</a>
+                <a class="page-link" href="<?= $base; ?>?page=<?= $paginator->previous; ?>">Poprzednia</a>
             <?php else: ?>
-                <span class="page-link">Previous</span>
+                <span class="page-link">Poprzednia</span>
             <?php endif; ?>
         </li>
         <li class="page-item">
             <?php if ($paginator->next): ?>
-                <a class="page-link" href="<?= $base; ?>?page=<?= $paginator->next; ?>">Next</a>
+                <a class="page-link" href="<?= $base; ?>?page=<?= $paginator->next; ?>">Następna</a>
             <?php else: ?>
-                <span class="page-link">Next</span>
+                <span class="page-link">Następna</span>
             <?php endif; ?>
         </li>
     </ul>

@@ -33,7 +33,7 @@
                 </div>
 
                 <fieldset>
-                    <legend>Categories</legend>
+                    <legend>Kategorie</legend>
 
                     <?php foreach ($categories as $category): ?>
                         <div class="form-check">

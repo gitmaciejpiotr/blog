@@ -18,52 +18,63 @@ $articles = Article::getPage($conn, $paginator->limit, $paginator->offset);
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
-                    <h1>Napisz</h1>
-                    <span class="subheading">nowy artykuł</span>
+                    <h1>A może by tak...</h1>
+                    <span class="subheading">poedytować?</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<h2>Administration</h2>
+<main class="container px-4 px-lg-5 mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
 
-<p><a href="new-article.php">New article</a></p>
+                <h2>Administracja</h2>
 
-<?php if (empty($articles)) : ?>
-    <p>No articles found.</p>
-<?php else : ?>
+                <p><a href="new-article.php">Nowy artykuł</a></p>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Published</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($articles as $article) : ?>
-                <tr>
-                    <td>
-                        <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a>
-                    </td>
-                    <td>
-                        <?php if ($article['published_at']) : ?>
-                            <time><?= $article['published_at'] ?></time>
-                        <?php else : ?>
-                            Unpublished
+                <?php if (empty($articles)): ?>
+                    <p>No articles found.</p>
+                <?php else: ?>
 
-                            <button class="publish" data-id="<?= $article['id'] ?>">Publish</button>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Tytuł</th>
+                                <th>Opublikowano:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($articles as $article): ?>
+                                <tr>
+                                    <td>
+                                        <a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a>
+                                    </td>
+                                    <td>
+                                        <?php if ($article['published_at']): ?>
+                                            <time>
+                                                <?= $article['published_at'] ?>
+                                            </time>
+                                        <?php else: ?>
+                                            Unpublished
 
-                        <?php endif; ?>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+                                            <button class="publish" data-id="<?= $article['id'] ?>">Publish</button>
 
-    <?php require '../includes/pagination.php'; ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
 
-<?php endif; ?>
+                    <?php require '../includes/pagination.php'; ?>
 
-<?php require '../includes/footer.php'; ?>
+                <?php endif; ?>
+
+            </div>
+        </div>
+    </div>
+
+    <?php require '../includes/footer.php'; ?>
