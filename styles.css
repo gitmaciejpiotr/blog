@@ -120,7 +120,6 @@ h1, .h1 {
 
 h2, .h2 {
   font-size: calc(1.325rem + 0.9vw);
-  color: red;
 }
 @media (min-width: 1200px) {
   h2, .h2 {
@@ -2377,6 +2376,7 @@ progress {
 
 textarea.form-control {
   min-height: calc(1.5em + 0.75rem + 2px);
+  resize: none;
 }
 textarea.form-control-sm {
   min-height: calc(1.5em + 0.5rem + 2px);
