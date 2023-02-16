@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
 
     $article = Article::getByID($conn, $_GET['id']);
 
-    if ( ! $article) {
+    if (!$article) {
         die("article not found");
     }
 
@@ -42,8 +42,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php require '../includes/header.php'; ?>
 
-<h2>Edit article</h2>
+<header class="masthead" style="background-image: url('../uploads/pobrane.jfif')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>A może by tak...</h1>
+                    <span class="subheading">poedytować?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-<?php require 'includes/article-form.php'; ?> 
+<?php require 'includes/article-form.php'; ?>
 
 <?php require '../includes/footer.php'; ?>

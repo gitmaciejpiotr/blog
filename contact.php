@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="page-heading">
                     <h1>W kontakcie!</h1>
-                    <span class="subheading">Czego dusza potrzebuje? Słucham</span>
+                    <span class="subheading">Czego dusza potrzebuje? Słucham...</span>
                 </div>
             </div>
         </div>

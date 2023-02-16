@@ -11118,6 +11118,22 @@ footer {
   padding-bottom: 3rem;
 }
 
+header {
+  position: relative;
+  margin-bottom: 3rem;
+  padding-top: calc(3rem + 57px);
+  background: no-repeat center center;
+  background-color: #6c757d;
+  background-size: cover;
+  background-attachment: scroll;
+}
+
+header h2 {
+  color: white;
+  padding-left: 30%;
+  padding-bottom: 10%;
+}
+
 header.masthead {
   position: relative;
   margin-bottom: 3rem;
@@ -11257,4 +11273,21 @@ ul#index {
 }
 #content {
     height: 10em;
+}
+.editAncor {
+  width: 20%;
+  color: #00404e;
+  transition: none;
+}
+.editAncor:hover {
+  color: blue;
+}
+#deleteButton {
+  color: #00404e;
+}
+#deleteButton:hover {
+  color: blue;
+}
+#deleteContainer {
+  width: 30%;
 }

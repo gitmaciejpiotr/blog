@@ -10,7 +10,7 @@ if (isset($_GET['id'])) {
 
     $article = Article::getByID($conn, $_GET['id']);
 
-    if ( ! $article) {
+    if (!$article) {
         die("article not found");
     }
 
@@ -36,15 +36,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <?php require '../includes/header.php'; ?>
 
-<h2>Delete article image</h2>
+<header>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h2>Usuń zdjęcie artykułu</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-<form method="post">
+<main class="container px-4 px-lg-5 mb-4">
+    <div id="deleteContainer" class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
 
-    <p>Are you sure?</p>
+            <form method="post">
 
-    <button>Delete</button>
-    <a href="edit-article-image.php?id=<?= $article->id; ?>">Cancel</a>
+                <p>Na pewno?</p>
 
-</form>
+                <button class="btn btn-primary text-uppercase mt-4">Usuń</button>
+                <a class="btn text-uppercase mt-4" id="deleteButton"
+                    href="article.php?id=<?= $article->id; ?>">Anuluj</a>
 
-<?php require '../includes/footer.php'; ?>
+            </form>
+        </div>
+    </div>
+
+
+
+    <?php require '../includes/footer.php'; ?>

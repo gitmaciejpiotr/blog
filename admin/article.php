@@ -15,38 +15,71 @@ if (isset($_GET['id'])) {
 ?>
 <?php require '../includes/header.php'; ?>
 
-<?php if ($article) : ?>
+<body>
+    <header class="masthead" style="background-image: url('/uploads/<?= $article[0]['image_file']; ?>')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <h1>
+                            <?= htmlspecialchars($article[0]['title']); ?>
+                        </h1>
+                        <time class="subheading" datetime="<?= $article[0]['published_at'] ?>"><?php
+                          $datetime = new DateTime($article[0]['published_at']);
+                          echo $datetime->format("j F, Y");
+                          ?></time>
+                        <span class="meta">
+                            Zapostował
+                            <a href="#!">Maciej P.</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container px-4 px-lg-5">
 
-    <article>
-        <h2><?= htmlspecialchars($article[0]['title']); ?></h2>
+        <?php if ($article): ?>
 
-        <?php if ($article[0]['published_at']) : ?>
-            <time><?= $article[0]['published_at'] ?></time>
-        <?php else : ?>
-            Unpublished
+            <article class="mb-4">
+
+                <!-- <time datetime="<?= $article[0]['published_at'] ?>"><?php
+                  $datetime = new DateTime($article[0]['published_at']);
+                  echo $datetime->format("j F, Y");
+                  ?></time> -->
+
+                <?php if ($article[0]['category_name']): ?>
+                    <p>Kategorie:
+                        <?php foreach ($article as $a): ?>
+                            <?= htmlspecialchars($a['category_name']); ?>
+                        <?php endforeach; ?>
+                    </p>
+                <?php endif; ?>
+
+                <div class="container px-4 px-lg-5">
+                    <div class="row gx-4 gx-lg-5 justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-7">
+                            <?php if ($article[0]['image_file']): ?>
+                                <img src="/uploads/<?= $article[0]['image_file']; ?>">
+                            <?php endif; ?>
+
+                            <p>
+                                <?= htmlspecialchars($article[0]['content']); ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <div class="row gx-4 justify-content-center">
+                <a class="editAncor" href="edit-article.php?id=<?= $article[0]['id']; ?>">Edytuj</a>
+                <a class="editAncor delete" href="delete-article.php?id=<?= $article[0]['id']; ?>">Usuń</a>
+                <a class="editAncor" href="edit-article-image.php?id=<?= $article[0]['id']; ?>">Edytuj zdjęcie</a>
+            </div>
+
+
+        <?php else: ?>
+            <p>Article not found.</p>
         <?php endif; ?>
 
-        <?php if ($article[0]['category_name']) : ?>
-            <p>Categories:
-                <?php foreach ($article as $a) : ?>
-                    <?= htmlspecialchars($a['category_name']); ?>
-                <?php endforeach; ?>
-            </p>
-        <?php endif; ?>
-
-        <?php if ($article[0]['image_file']) : ?>
-            <img src="/uploads/<?= $article[0]['image_file']; ?>">
-        <?php endif; ?>
-
-        <p><?= htmlspecialchars($article[0]['content']); ?></p>
-    </article>
-
-    <a href="edit-article.php?id=<?= $article[0]['id']; ?>">Edit</a>
-    <a class="delete" href="delete-article.php?id=<?= $article[0]['id']; ?>">Delete</a>
-    <a href="edit-article-image.php?id=<?= $article[0]['id']; ?>">Edit image</a>
-
-<?php else : ?>
-    <p>Article not found.</p>
-<?php endif; ?>
-
-<?php require '../includes/footer.php'; ?>
+        <?php require '../includes/footer.php'; ?>
