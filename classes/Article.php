@@ -298,10 +298,10 @@ class Article
     protected function validate()
     {
         if ($this->title == '') {
-            $this->errors[] = 'Title is required';
+            $this->errors[] = 'Wpisz tytuł';
         }
         if ($this->content == '') {
-            $this->errors[] = 'Content is required';
+            $this->errors[] = 'Wpisz treść';
         }
 
         if ($this->published_at != '') {
